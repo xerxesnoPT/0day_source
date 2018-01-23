@@ -1,5 +1,7 @@
 #include <stdio.h>
+
 #define PASSWORD "1234567"
+
 int verify_password (char *password)
 {
     int authenticated;

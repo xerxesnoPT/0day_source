@@ -8,7 +8,7 @@ int verify_password (char *password)
     strcpy(buffer,password);
     return authenticated;
 }
-main()
+int main()
 {
     int valid_flag = 0;
     char password[1024];

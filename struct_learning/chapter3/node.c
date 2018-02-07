@@ -1,3 +1,4 @@
+#include <stdio.h>
 #define OK 1
 #define ERROR 1
 #define TRUE 1
@@ -13,6 +14,40 @@ typedef struct Node
 }Node;
 
 typedef struct Node *LinkList;
+
+// 头插法
+void CreateListHead(LinkList *L, int n)
+{
+  LinkList p;
+  int i;
+  srand(time(0));
+  *L = (LinkList)malloc(sizeof(Node));
+  (*L) -> next = NULL;
+  for (i=0;i<n;i++)
+  {
+    p = (LinkList)malloc(sizeof(Node));
+    p ->data = rand() %100+1;
+    p ->next = (*L)->next;
+    (*L)-> next = p;
+  }
+}
+
+void CreateListtail(LinkList *L, int n)
+{
+  LinkList p,r;
+  int i;
+  srand(time(0));
+  *L = (LinkList)malloc(sizeof(Node));
+  r = *L;
+  for (i=0;i<n;i++)
+  {
+    p = (LinkList)malloc(sizeof(Node));
+    p ->data = rand() %100+1;
+    r-> next = p;
+    r = p;
+  }
+  r ->next = NULL;
+}
 
 Status GetElm(LinkList L, int i, ElemType *e)
 {
@@ -71,3 +106,17 @@ Status ListDelete(LinkList *L,int i, ElemType *e)
   return OK;
 }
 
+Status ClearList(LinkList *L)
+{
+  LinkList p,q;
+  int i;
+  p = (*L)->next;
+    while(p)
+    {
+      q = p->next;
+      free(p);
+      p = q;
+    }
+    (*L)->next = NULL;
+    return OK;
+}
